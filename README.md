@@ -19,7 +19,7 @@ The game comes with a very basic panel, allowing the user to add obstacles to th
 
 <img src="https://res.cloudinary.com/dq4xpsevx/image/upload/v1715037142/Github/Snake%20Game/gnrwbyvuezveu9fpnymo.png" alt="Game" width="1000">
 
-## suprise
+## surprise
 
 By creating a new structures for the obstacles to turn them into walls and adapts their ability to move, as well as a new propriety for the snake to move, it comes a whole new game we also all know.
 
