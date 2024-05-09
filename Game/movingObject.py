@@ -2,6 +2,8 @@
 from typing import Callable, Union
 import time
 
+from settings import *
+
 class Moving_object:
     head: (int, int)
     length: int     # equivalent to width in 2d
@@ -27,9 +29,9 @@ class Moving_object:
 
             for i in range(1, length):
                 # incrementing body of object one block by one block horizontally
-                x = x0 + i * my_screen.get_block()
-                if x > my_screen.get_screen_width():
-                    x = x % my_screen.get_screen_width()
+                x = x0 + i * snake_block
+                if x > dis_width:
+                    x = x % dis_width
                 self.body.append((x, y))
 
     # getters / setters
@@ -91,7 +93,7 @@ class Moving_object:
         :param override_color: rgb color in case need to display in specific value
         :return:
         """
-        block = my_screen.get_block()
+        block = snake_block
         # 1 -
         display_color = self.color
         if override_color:
@@ -137,7 +139,7 @@ class Moving_object:
         :param other_obj: other object of type Moving_object
         :return:
         """
-        block = my_screen.get_block()
+        block = snake_block
         for (headx, heady) in self.body:
             for (xpos, ypos) in other_obj.body:
                 height = other_obj.height
@@ -185,10 +187,10 @@ class Moving_object:
         (headx, heady) = position
         (changex, changey) = direction
 
-        if headx >= my_screen.get_screen_width():  # hits right border
+        if headx >= dis_width:  # hits right border
             headx = 0
         elif headx < 0:  # hits left border
-            headx = my_screen.get_screen_width()
+            headx = dis_width
 
         if heady >= my_screen.get_screen_height():  # hits top border
             heady = 0
@@ -208,8 +210,8 @@ class Moving_object:
         :param width: width of object to generate
         :return: (x,y)
         """
-        block = my_screen.get_block()
-        xpos = round(random.randrange(0, my_screen.get_screen_width() - width * block) / 10.0) * 10.0
+        block = snake_block
+        xpos = round(random.randrange(0, dis_width - width * block) / 10.0) * 10.0
         ypos = round(random.randrange(0, my_screen.get_screen_height() - height * block) / 10.0) * 10.0
 
         return xpos, ypos
@@ -323,7 +325,7 @@ class Food(Moving_object):
 class Snake(Moving_object):
 
     def __init__(self, speed):
-        super().__init__((my_screen.get_screen_width() / 2, my_screen.get_screen_height() / 2), 1, 1, dark_green)
+        super().__init__((dis_width / 2, my_screen.get_screen_height() / 2), 1, 1, dark_green)
         self.base_speed = speed
         self.current_speed = speed
 
@@ -358,7 +360,7 @@ class Flying_snake(Snake):
         width_snake = 1
         height_snake = 1
 
-        Moving_object.__init__(self, (my_screen.get_screen_width() / 2, my_screen.get_screen_height() / 2),
+        Moving_object.__init__(self, (dis_width / 2, my_screen.get_screen_height() / 2),
                                height_snake, width_snake, red)
         self.base_speed = speed
         self.current_speed = speed
@@ -370,8 +372,8 @@ class Flying_snake(Snake):
         :param position: change of position on x-axis and y-axis due to player move
         :return:
         """
-        default_move_up = -3 * my_screen.get_block()  # by default any up move will be by 3 times the normal move
-        default_move_down = 2 * my_screen.get_block()
+        default_move_up = -3 * snake_block  # by default any up move will be by 3 times the normal move
+        default_move_down = 2 * snake_block
 
         (movex, movey) = position
 
