@@ -6,7 +6,7 @@ Quick implementation of a project known by everyone : snake. <br>
 
 The user interface could have been elaborated in a more graphical way but the true complexity was in the game itself. Due to the flexibility of the code structure, it was easy to add a changes to the original game with more original and entertaining features. 
 
-See initial instructions [here](docs/instructions.pdf)
+See initial instructions [here](Docs/instructions.pdf)
 
 ## interface
 
